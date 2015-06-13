@@ -13,27 +13,27 @@ var getElementsByClassName = function(className){
 	}
 
 	var nodesWithClass = [];
-	//var element = document; 
-	var children = document.childNodes;
+	var element = document.body;
+	var children = element.childNodes;
 
-	/*if(element.classList && element.classList.contains(className)){
+	if(element.classList && element.classList.contains(className)){
 		nodesWithClass.push(element);
-	}*/
-	
+	}
+
+		
 	var walkTheDom = function(nodeArray){
-		if(nodeArray === undefined){
-			return;
-		}
+		
 		for(var i = 0; i < nodeArray.length; i++){
 			var node = nodeArray[i];
-			if(node.classList && node.classList.contains(className)){
+			if( node && node.classList && node.classList.contains(className)){
 				nodesWithClass.push(node);
-			}
+			}	
 			if(node.childNodes){
-				return walkTheDom(node);
+				walkTheDom(node.childNodes);
 			}
 		}
 	};
+	
 	walkTheDom(children);
 	return nodesWithClass;
 
